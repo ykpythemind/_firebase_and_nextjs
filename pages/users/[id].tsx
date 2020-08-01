@@ -4,13 +4,14 @@ import { User } from '../../interfaces'
 import { sampleUserData } from '../../utils/sample-data'
 import Layout from '../../components/Layout'
 import ListDetail from '../../components/ListDetail'
+// import { getAuth } from '../../utils/firebase'
 
 type Props = {
   item?: User
   errors?: string
 }
 
-const StaticPropsDetail = ({ item, errors }: Props) => {
+const Page = ({ item, errors }: Props) => {
   if (errors) {
     return (
       <Layout title="Error | Next.js + TypeScript Example">
@@ -27,12 +28,12 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
         item ? item.name : 'User Detail'
       } | Next.js + TypeScript Example`}
     >
-      {item && <ListDetail item={item} />}
+      <ListDetail />
     </Layout>
   )
 }
 
-export default StaticPropsDetail
+export default Page
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get the paths we want to pre-render based on users
@@ -48,13 +49,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 // This function gets called at build time on server-side.
 // It won't be called on client-side, so you can even do
 // direct database queries.
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async () => {
   try {
-    const id = params?.id
-    const item = sampleUserData.find((data) => data.id === Number(id))
-    // By returning { props: item }, the StaticPropsDetail component
-    // will receive `item` as a prop at build time
-    return { props: { item } }
+    return { props: {} }
   } catch (err) {
     return { props: { errors: err.message } }
   }
