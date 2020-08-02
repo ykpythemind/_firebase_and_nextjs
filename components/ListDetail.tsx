@@ -1,15 +1,10 @@
 import * as React from 'react'
 
-import { User } from '../interfaces'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { getAuth } from '../utils/firebase'
 import { useState, useEffect } from 'react'
 
-type ListDetailProps = {
-  item?: User
-}
-
-const ListDetail = ({}: ListDetailProps) => {
+const ListDetail = () => {
   const [user, loading, error] = useAuthState(getAuth())
 
   const [text, setText] = useState('')
@@ -19,10 +14,8 @@ const ListDetail = ({}: ListDetailProps) => {
 
       const token = await user.getIdToken(true)
 
-      const id = 1 // wip
-
       console.log('-------')
-      const res = await fetch(`http://localhost:3000/api/users/${id}`, {
+      const res = await fetch(`http://localhost:3000/api/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -1,4 +1,5 @@
 import * as admin from 'firebase-admin'
+import { NextApiRequest } from 'next'
 
 const raw = process.env.GOOGLE_APPLICATION_CREDENTIALS
 if (!raw) {
@@ -21,4 +22,9 @@ export function getAdmin(): admin.app.App {
 export async function verifyIdToken(idToken: string) {
   const admin = getAdmin()
   return await admin.auth().verifyIdToken(idToken)
+}
+
+export function getIdTokenFromReq(req: NextApiRequest) {
+  const idToken = req.headers['authorization'] as string
+  return idToken?.replace(/^Bearer (.*)/, '$1')
 }

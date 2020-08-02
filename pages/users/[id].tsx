@@ -27,9 +27,7 @@ const Page = ({ item, errors }: Props) => {
       title={`${
         item ? item.name : 'User Detail'
       } | Next.js + TypeScript Example`}
-    >
-      <ListDetail />
-    </Layout>
+    ></Layout>
   )
 }
 
