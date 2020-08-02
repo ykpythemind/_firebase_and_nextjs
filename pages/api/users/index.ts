@@ -18,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  console.log(token.uid)
+  // console.log(token.uid)
   // do something with db...
 
   try {
